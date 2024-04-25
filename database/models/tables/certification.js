@@ -16,8 +16,8 @@ module.exports = class Certification extends Sequelize.Model {
       sequelize,
       timestamps: false,
       underscored : true,
-      modelName: 'agent_contact',
-      tableName: "agent_contact",
+      modelName: 'certification',
+      tableName: "certification",
       paranoid: false,
       charset: 'utf8mb4', // 이모티콘까지 입력받을수 있도록
       collate: 'utf8mb4_general_ci', // 이모티콘까지 입력받을수 있도록
