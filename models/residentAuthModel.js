@@ -40,11 +40,58 @@ module.exports = {
       return res.redirect('/');
     }
   },
+  update: async (req, res) => {
+    const body = req.body;
+    
+    try {
+      const resident = await Resident.update(
+        {
+          r_email: body.email,
+          r_phone: body.phone
+        },
+        { where: {
+          r_username: body.username}
+        }
+      );
+      
+      return res.json(resident);
+    } catch(err) {
+      console.log('[error] auth DB : ', err);
+      return res.redirect('/');
+    }
+  },
+  updatepw: async (req, res) => {
+    const body = req.body;
+
+    try {
+      const passwordHash = await bcrypt.hash(body.password, saltRounds);
+
+      const resident = await Resident.findOne({
+        where: {r_username: body.username}
+      });
+      
+      if(!resident) return res.redirect('');
+      const password = resident.dataValues.r_password;
+      const test = await bcrypt.compare(body.oldpassword, password);
+      if (!test) {
+        return res.json({});
+      } else {
+        await resident.update({
+          r_password: passwordHash
+        });
+        await resident.save();
+        return res.json(resident);
+      }
+    } catch (error) {
+      console.error(error);
+      return res.json({});
+    }
+  },
   delete: async (req, res) => {
     const r_username = req.body.username;
     try {
       await Resident.destroy({ where: {r_username: r_username} });
-      return 1;
+      return res.json({});
     } catch (error) {
       return error;
     }
