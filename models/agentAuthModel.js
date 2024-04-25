@@ -59,12 +59,11 @@ module.exports = {
     try {
       const agent = await Agent.update(
         {
-          r_email: body.email,
-          r_phone: body.phone
+          a_email: body.email,
         },
         { where: {
-          r_username: body.userId}
-        }
+          a_username: body.userId
+        }}
       );
       
       return res.json(agent);
@@ -101,7 +100,7 @@ module.exports = {
     }
   },
   delete: async (req, res) => {
-    const a_username = req.body.username;
+    const a_username = req.body.userId;
     try {
       await Agent.destroy({ where: {a_username: a_username} });
       return res.json({});
