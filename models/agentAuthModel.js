@@ -40,6 +40,19 @@ module.exports = {
       return res.redirect('/');
     }
   },
+  findByRaRegno: async (req, res) => {
+    const ra_regno = req.params.ra_regno;
+
+    try {
+      const agent = await Agent.findAll({ where: {agent_list_ra_regno: ra_regno} });
+      if(agent) {
+        return res.json(agent);
+      }
+      return res.json({});
+    } catch(err) {
+      return res.redirect('/');
+    }
+  },
   update: async (req, res) => {
     const body = req.body;
     

@@ -10,10 +10,12 @@ const {sequelize} = require('./database/models/');
 sequelize.sync({force : false});
 
 const agentAuthRouter = require('./routers/agentAuthRouter.js');
+const agentListRouter = require('./routers/agentListRouter.js');
 const residentAuthRouter = require('./routers/residentAuthRouter.js');
 const certRouter = require('./routers/certRouter.js');
 
 app.use('/db/agent', agentAuthRouter);
+app.use('/db/agentlist', agentListRouter);
 app.use('/db/resident', residentAuthRouter);
 app.use('/db/cert', certRouter);
 
