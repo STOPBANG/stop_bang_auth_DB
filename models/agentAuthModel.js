@@ -19,11 +19,12 @@ module.exports = {
         agent_list_ra_regno: body.agentList_ra_regno,
       });
 
-      // 새로 생성된 사용자 id 가져오기
-      // return result(user.r_username);
+      // 새로 생성된 사용자의 ID 반환
+      console.log("db 저장 성공");
+      return res.json(user.id);
     } catch (err) {
-      console.error("🚀 ~ err:", err);
-      // return result(null);
+      console.error("회원가입 오류:", err);
+      return res.redirect('/');
     }
   },
   findById: async (req, res) => {
