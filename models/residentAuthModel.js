@@ -20,10 +20,10 @@ module.exports = {
       });
 
       // 새로 생성된 사용자 id 가져오기
-      // return result(user.r_username);
+      return res.json({id: user.id, userId: user.r_username});
     } catch (err) {
       console.error("🚀 ~ err:", err);
-      // return result(null);
+      return res.redirect('/');
     }
   },
   findById: async (req, res) => {
