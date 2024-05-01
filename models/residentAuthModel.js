@@ -40,6 +40,20 @@ module.exports = {
       return res.redirect('/');
     }
   },
+  findByPk: async (req, res) => {
+    const id = req.body.resident_r_id; // id는 로그인 시 사용하는 username
+
+    try {
+      const resident = await Resident.findAll({ where: {id: id}});
+      if(resident) {
+        return res.json(resident);
+      }
+      return res.json({});
+    } catch(err) {
+      console.log('[error] auth DB : ', err);
+      return res.redirect('/');
+    }
+  },
   update: async (req, res) => {
     const body = req.body;
     
