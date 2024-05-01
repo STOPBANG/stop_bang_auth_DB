@@ -21,7 +21,7 @@ module.exports = {
 
       // 새로 생성된 사용자의 ID 반환
       console.log("db 저장 성공");
-      return res.json(user.a_username);
+      return res.json({id: user.id, userId: user.a_username});
     } catch (err) {
       console.error("회원가입 오류:", err);
       return res.redirect('/');
