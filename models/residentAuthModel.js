@@ -101,6 +101,21 @@ module.exports = {
       return res.json({});
     }
   },
+  updatePoint: async (req, res) =>{
+    const r_username = req.body.username;
+    try {
+      await Resident.increment(
+        { r_point: req.body.r_point },
+        { where: {
+          r_username: r_username} 
+      });
+      return res.json({});
+    } catch (error) {
+      console.log('[error] auth DB : ', error);
+      return res.redirect('/');
+    }
+  },
+
   delete: async (req, res) => {
     const r_username = req.body.username;
     try {
