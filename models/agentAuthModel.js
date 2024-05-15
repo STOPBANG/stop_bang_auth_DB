@@ -100,6 +100,20 @@ module.exports = {
       return res.json({});
     }
   },
+  
+  updateImage: async (req, res) => {
+    const ra_regno = req.params.agentId;
+    console.log(req.body);
+    const files = req.body.files;
+    const introduction = req.body.introduction;
+    try {
+      await Agent.update({a_image1: (files.myImage1 ? files.myImage1[0].filename : null)}, {a_image2 : (files.myImage2 ? files.myImage2[0].filename : null)}, {a_image3: (files.myImage3 ? files.myImage3[0].filename : null)}, {a_introduction: introduction}, { where: {agent_list_ra_regno: ra_regno} });
+      return res.json({});
+    } catch (error) {
+      return error;
+    }
+  },
+
   delete: async (req, res) => {
     const a_username = req.body.userId;
     try {
