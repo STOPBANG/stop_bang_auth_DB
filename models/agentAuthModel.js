@@ -104,9 +104,8 @@ module.exports = {
   updateImage: async (req, res) => {
     const body = req.body;
     try {
-      let a_image1 = null;
-      let a_image2 = null;
-      let a_image3 = null;
+      let a_image1, a_image2, a_image3;
+      
       if(body.file != undefined){
         if(body.file.length == 1){
           a_image1 = body.file[0];
