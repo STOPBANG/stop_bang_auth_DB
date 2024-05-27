@@ -8,6 +8,7 @@ router.get('/findByRaRegno/:ra_regno', agentAuthModel.findByRaRegno);
 router.put('/update', agentAuthModel.update);
 router.put('/updatepw', agentAuthModel.updatepw);
 router.put('/updateImage', agentAuthModel.updateImage);
+router.put('/updateEnteredInfo', agentAuthModel.updateEnteredInfo);
 router.post('/delete', agentAuthModel.delete);
 
 module.exports = router

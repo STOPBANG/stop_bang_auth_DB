@@ -119,6 +119,22 @@ module.exports = {
     }
   },
 
+  updateEnteredInfo: async (req, res) => {
+    const body = req.body;
+    try {
+      await Agent.update(
+        {
+          a_profile_image: (body.file.length ? body.file[0] : null),
+          a_office_hours : (body.a_office_hours != undefined ? body.a_office_hours : null)
+        },
+        { where: {a_username: body.sys_regno} });
+      return res.json({});
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  },
+
   delete: async (req, res) => {
     const a_username = req.body.userId;
     try {
