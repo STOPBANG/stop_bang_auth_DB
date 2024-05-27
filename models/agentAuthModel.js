@@ -102,14 +102,19 @@ module.exports = {
   },
   
   updateImage: async (req, res) => {
-    const ra_regno = req.params.agentId;
-    console.log(req.body);
-    const files = req.body.files;
-    const introduction = req.body.introduction;
+    const body = req.body;
     try {
-      await Agent.update({a_image1: (files.myImage1 ? files.myImage1[0].filename : null)}, {a_image2 : (files.myImage2 ? files.myImage2[0].filename : null)}, {a_image3: (files.myImage3 ? files.myImage3[0].filename : null)}, {a_introduction: introduction}, { where: {agent_list_ra_regno: ra_regno} });
+      await Agent.update(
+        {
+          a_image1: (body.file.length == 1 ? body.file[0] : null), 
+          a_image2: (body.file.length == 1 ? body.file[1] : null), 
+          a_image3: (body.file.length == 1 ? body.file[2] : null), 
+          a_introduction: (body.introduction != undefined ? body.introduction : null)
+        }, 
+      { where: {agent_list_ra_regno: body.sys_regno} });
       return res.json({});
     } catch (error) {
+      console.log(error);
       return error;
     }
   },
