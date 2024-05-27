@@ -104,11 +104,28 @@ module.exports = {
   updateImage: async (req, res) => {
     const body = req.body;
     try {
+      let a_image1 = null;
+      let a_image2 = null;
+      let a_image3 = null;
+      if(body.file != undefined){
+        if(body.file.length == 1){
+          a_image1 = body.file[0];
+        }
+        else if(body.file.length == 2){
+          a_image1 = body.file[0];
+          a_image2 = body.file[1];
+        }
+        else if(body.file.length == 3){
+          a_image1 = body.file[0];
+          a_image2 = body.file[1];
+          a_image3 = body.file[2];
+        }
+      }
       await Agent.update(
         {
-          a_image1: (body.file.length == 1 ? body.file[0] : null), 
-          a_image2: (body.file.length == 1 ? body.file[1] : null), 
-          a_image3: (body.file.length == 1 ? body.file[2] : null), 
+          a_image1: a_image1, 
+          a_image2: a_image2, 
+          a_image3: a_image3, 
           a_introduction: (body.introduction != undefined ? body.introduction : null)
         }, 
       { where: {agent_list_ra_regno: body.sys_regno} });
@@ -124,10 +141,10 @@ module.exports = {
     try {
       await Agent.update(
         {
-          a_profile_image: (body.file.length ? body.file[0] : null),
+          a_profile_image: (body.file != undefined ? body.file : null),
           a_office_hours : (body.a_office_hours != undefined ? body.a_office_hours : null)
         },
-        { where: {a_username: body.sys_regno} });
+        { where: {agent_list_ra_regno: body.sys_regno} });
       return res.json({});
     } catch (error) {
       console.log(error);
