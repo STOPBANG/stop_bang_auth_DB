@@ -164,12 +164,20 @@ module.exports = {
   updateEnteredInfo: async (req, res) => {
     const body = req.body;
     try {
-      await Agent.update(
-        {
-          a_profile_image: (body.file != undefined ? body.file : null),
-          a_office_hours : (body.a_office_hours != undefined ? body.a_office_hours : null)
-        },
-        { where: {agent_list_ra_regno: body.sys_regno} });
+      if(body.file != undefined){
+        await Agent.update(
+          {
+            a_profile_image: body.file,
+          },
+          { where: {agent_list_ra_regno: body.sys_regno} });
+      }
+      if(body.a_office_hours != undefined){
+        await Agent.update(
+          {
+            a_office_hours : body.a_office_hours
+          },
+          { where: {agent_list_ra_regno: body.sys_regno} });
+      }
       return res.json({});
     } catch (error) {
       console.log(error);
