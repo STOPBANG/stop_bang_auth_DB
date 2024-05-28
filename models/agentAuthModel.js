@@ -16,7 +16,7 @@ module.exports = {
         a_realname: body.realname,
         a_email: body.email,
         a_phone: body.phone,
-        agent_list_ra_regno: body.agentList_ra_regno,
+        agent_list_ra_regno: body.agentList_sys_regno,
       });
 
       // 새로 생성된 사용자의 ID 반환
