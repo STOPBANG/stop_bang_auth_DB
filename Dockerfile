@@ -6,5 +6,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 3000
-CMD npx wait-port auth_db:3306 && \
-  npm run start
+CMD npm run start
