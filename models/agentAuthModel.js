@@ -107,38 +107,32 @@ module.exports = {
       let a_image1, a_image2, a_image3;
       
       if(body.file != undefined){
-        if(body.file.length == 1){
+        if(body.file[0] != ''){
           await Agent.update(
-            {
-              a_image1:  body.file[0], 
-            }, 
-          { where: {agent_list_ra_regno: body.sys_regno} });
-          // a_image1 = body.file[0];
-        }
-        else if(body.file.length == 2){
+                {
+                  a_image1:  body.file[0], 
+                }, 
+              { where: {agent_list_ra_regno: body.sys_regno} }
+            );
+          }
+        if(body.file[1] != ''){
           await Agent.update(
-            {
-              a_image1: body.file[0], 
-              a_image2: body.file[1], 
-            }, 
-          { where: {agent_list_ra_regno: body.sys_regno} });
-          // a_image1 = body.file[0];
-          // a_image2 = body.file[1];
-        }
-        else if(body.file.length == 3){
+                {
+                  a_image2:  body.file[1], 
+                }, 
+              { where: {agent_list_ra_regno: body.sys_regno} }
+            );
+          }
+        if(body.file[2] != ''){
           await Agent.update(
-            {
-              a_image1: body.file[0], 
-              a_image2: body.file[1], 
-              a_image3: body.file[2],
-              a_introduction: (body.introduction != undefined ? body.introduction : null)
-            }, 
-          { where: {agent_list_ra_regno: body.sys_regno} });
-          // a_image1 = body.file[0];
-          // a_image2 = body.file[1];
-          // a_image3 = body.file[2];
+                {
+                  a_image3:  body.file[2], 
+                }, 
+              { where: {agent_list_ra_regno: body.sys_regno} }
+            );
+          }
         }
-      }
+      
       if(body.introduction != undefined){
         await Agent.update(
           {
