@@ -26,10 +26,13 @@ module.exports = {
     }
     return res.json({ email: email, code: code });
   },
-  compare: async (req, res) => {
+  findCertByCode: async (req, res) => {
     const body = req.body;
-    const cert = await Certification.findAll({ where: {email: body.email, code: body.code}});
+    const cert = await Certification.findAll({where: {email: body.email, code: body.code}});
 
-    return res.json(cert);
+    console.log("body.email : ", body.email, ", body.code : ", body.code);
+    console.log("cert result : ", cert);
+
+    return res.json({cert: cert});
   }
 }
