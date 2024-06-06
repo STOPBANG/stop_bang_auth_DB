@@ -10,7 +10,19 @@ const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config')[env];
 const db = {};
 
-const sequelize = new Sequelize(config.database, config.username, config.password, config); 
+// const sequelize = new Sequelize(config.database, config.username, config.password, config); 
+console.log("initial sequelize is start");
+let sequelize; 
+new Sequelize(config.database, config.username, config.password, config).authenticate()
+.then(() => {
+  console.log('Connection has been established successfully.');
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+})
+.catch(err => {
+    console.log(err);
+  console.error('Unable to connect to the database:', err);
+  exit(1);
+});
 
 db.sequelize = sequelize;
 db.Agent = Agent;
