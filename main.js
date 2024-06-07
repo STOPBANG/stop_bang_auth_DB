@@ -7,7 +7,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const {sequelize} = require('./database/models/');
-console.log("========sync start========");
 sequelize.sync({force : false});
 
 const agentAuthRouter = require('./routers/agentAuthRouter.js');
